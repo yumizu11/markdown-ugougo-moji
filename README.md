@@ -345,9 +345,21 @@ Copy-Item vscode\package.json, vscode\extension.js, vscode\README.md $dest
 VS Code を再起動（またはコマンドパレットから「Developer: Reload Window」）すると有効になります。
 
 配布用に `.vsix` を作る場合は [`@vscode/vsce`](https://github.com/microsoft/vscode-vsce) を使います。
+**`vscode/` の中で実行してください。**
 
 ```bash
-npx @vscode/vsce package
+cd vscode && npx --yes @vscode/vsce package
+```
+
+> [!IMPORTANT]
+> リポジトリのルートで実行すると `Manifest missing field: engines` で失敗します。
+> ルートの `package.json` は Obsidian プラグインとビルド用のもので、
+> VS Code のマニフェストは `vscode/package.json` の方だからです。
+
+できあがった `.vsix` はこう入れます。
+
+```bash
+code --install-extension vscode/ugougo-moji-0.1.0.vsix
 ```
 
 ### 使う
@@ -462,4 +474,7 @@ Marp 以外の markdown-it 環境（VitePress など）にもそのまま `.use(
 
 ## ライセンス
 
-MIT
+MIT — [LICENSE](LICENSE) を参照してください。
+
+`vscode/LICENSE.txt` は同じ内容の複製です。vsce はパッケージ対象ディレクトリの中しか
+見ないため、`.vsix` に含めるには `vscode/` 側にも必要です。

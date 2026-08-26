@@ -19,6 +19,7 @@
 		"animation"
 	],
 	"main": "./extension.js",
+	"activationEvents": [],
 	"contributes": {
 		"markdown.markdownItPlugins": true,
 		"configuration": {
@@ -105,5 +106,12 @@
 				}
 			}
 		}
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/yumizu11/ugo_beta.git"
+	},
+	"bugs": {
+		"url": "https://github.com/yumizu11/ugo_beta/issues"
 	}
 }
