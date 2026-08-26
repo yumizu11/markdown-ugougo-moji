@@ -3,7 +3,7 @@
 	"displayName": "Ugougo Moji",
 	"description": "Renders text in ugougo code blocks as wobbling retro-TV style graphics in the Markdown preview.",
 	"version": "0.1.0",
-	"publisher": "mizutani",
+	"publisher": "yumizu",
 	"license": "MIT",
 	"engines": {
 		"vscode": "^1.70.0"
@@ -109,9 +109,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/yumizu11/ugo_beta.git"
+		"url": "https://github.com/yumizu11/markdown-ugougo-moji.git",
+		"directory": "vscode"
 	},
 	"bugs": {
-		"url": "https://github.com/yumizu11/ugo_beta/issues"
+		"url": "https://github.com/yumizu11/markdown-ugougo-moji/issues"
 	}
 }

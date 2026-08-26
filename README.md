@@ -48,7 +48,7 @@ vault の `.obsidian/plugins/ugougo-moji/` に上の 3 ファイルを置きま�
 PowerShell なら次の通りです。`$vault` を自分の vault のパスに変えてください。
 
 ```powershell
-$vault = "G:\code\obsidian"
+$vault = "C:\path\to\your\vault"
 $dest  = Join-Path $vault ".obsidian\plugins\ugougo-moji"
 New-Item -ItemType Directory -Force $dest
 Copy-Item main.js, manifest.json, styles.css $dest

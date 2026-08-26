@@ -26,5 +26,5 @@ wobble: 16
 Defaults for every option live under **Settings → Extensions → Ugougo Moji**.
 Refresh the preview after changing one.
 
-See the [project README](https://github.com/yumizu11/ugo_beta) for the full
+See the [project README](https://github.com/yumizu11/markdown-ugougo-moji) for the full
 option reference, the Obsidian plugin, and Marp slide support.
