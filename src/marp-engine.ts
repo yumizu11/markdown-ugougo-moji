@@ -16,8 +16,7 @@
  */
 
 import type { Marp as MarpClass, MarpOptions } from '@marp-team/marp-core';
-import { buildSvg } from './core';
-import { DEFAULT_SETTINGS, parseBlock, resolveOptions } from './options';
+import { ugougoMarkdownIt } from './markdown-it-plugin';
 
 /**
  * Finds marp-core.
@@ -86,59 +85,7 @@ function loadMarp(): typeof MarpClass {
 	}
 }
 
-/** Just enough of markdown-it to hook the fence rule without pulling in types. */
-interface FenceToken {
-	info?: string;
-	content: string;
-}
-type RenderRule = (
-	tokens: FenceToken[],
-	idx: number,
-	options: unknown,
-	env: unknown,
-	self: { renderToken: (tokens: FenceToken[], idx: number, options: unknown) => string }
-) => string;
-interface MarkdownItLike {
-	renderer: { rules: Record<string, RenderRule | undefined> };
-}
-
-/**
- * Layout CSS for the block wrapper. In the Obsidian plugin this lives in
- * styles.css, but a Marp deck has no stylesheet of ours to load, so each block
- * carries it. Repeating a few identical rules costs ~250 bytes per block and
- * keeps the engine stateless.
- */
-const BLOCK_CSS =
-	'.ugougo-block{display:flex;margin:.7em 0;overflow-x:auto}' +
-	'.ugougo-block[data-align=left]{justify-content:flex-start}' +
-	'.ugougo-block[data-align=center]{justify-content:center}' +
-	'.ugougo-block[data-align=right]{justify-content:flex-end}' +
-	'.ugougo-block .ugougo-svg{max-width:100%;height:auto;flex-shrink:1;overflow:visible}';
-
-/** The markdown-it plugin itself — usable with any markdown-it, not just Marp. */
-export function ugougoMarkdownIt(md: MarkdownItLike): void {
-	const fallback: RenderRule =
-		md.renderer.rules.fence ?? ((tokens, idx, options, _env, self) =>
-			self.renderToken(tokens, idx, options));
-
-	md.renderer.rules.fence = function (tokens, idx, options, env, self) {
-		const token = tokens[idx];
-		const info = (token?.info ?? '').trim();
-		if (info.split(/\s+/)[0] !== 'ugougo') {
-			return fallback(tokens, idx, options, env, self);
-		}
-
-		const { text, overrides } = parseBlock(token?.content ?? '');
-		const resolved = resolveOptions(DEFAULT_SETTINGS, overrides);
-		const built = buildSvg(text, resolved);
-		if (!built) return '';
-
-		return (
-			`<div class="ugougo-block" data-align="${resolved.align}">` +
-			`<style>${BLOCK_CSS}</style>${built.svg}</div>`
-		);
-	};
-}
+export { ugougoMarkdownIt, createUgougoPlugin } from './markdown-it-plugin';
 
 /** What Marp CLI loads via `--engine`. */
 export default function engine(options: MarpOptions): MarpClass {

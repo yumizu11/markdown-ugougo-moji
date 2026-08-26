@@ -1,0 +1,109 @@
+{
+	"name": "ugougo-moji",
+	"displayName": "Ugougo Moji",
+	"description": "Renders text in ugougo code blocks as wobbling retro-TV style graphics in the Markdown preview.",
+	"version": "0.1.0",
+	"publisher": "mizutani",
+	"license": "MIT",
+	"engines": {
+		"vscode": "^1.70.0"
+	},
+	"categories": [
+		"Programming Languages",
+		"Visualization"
+	],
+	"keywords": [
+		"markdown",
+		"preview",
+		"svg",
+		"animation"
+	],
+	"main": "./extension.js",
+	"contributes": {
+		"markdown.markdownItPlugins": true,
+		"configuration": {
+			"title": "Ugougo Moji",
+			"properties": {
+				"ugougoMoji.color": {
+					"type": "string",
+					"default": "#ffe600",
+					"markdownDescription": "Fill colour of the glyphs. Individual blocks can override this with `color:`."
+				},
+				"ugougoMoji.stroke": {
+					"type": "string",
+					"default": "#000000",
+					"description": "Outline colour drawn behind the fill."
+				},
+				"ugougoMoji.strokeWidth": {
+					"type": "number",
+					"default": 0.17,
+					"minimum": 0,
+					"maximum": 0.6,
+					"description": "Outline thickness, as a fraction of the font size."
+				},
+				"ugougoMoji.size": {
+					"type": "number",
+					"default": 56,
+					"minimum": 8,
+					"maximum": 240,
+					"description": "Font size."
+				},
+				"ugougoMoji.wobble": {
+					"type": "number",
+					"default": 12,
+					"minimum": 0,
+					"maximum": 30,
+					"markdownDescription": "How far the outline is pushed around. `9`–`16` stays readable; past about 20 the glyphs shred."
+				},
+				"ugougoMoji.freq": {
+					"type": "number",
+					"default": 0.015,
+					"minimum": 0.002,
+					"maximum": 0.09,
+					"markdownDescription": "Distortion detail. Low values give long smooth waves, high values a crumpled edge. `0.010`–`0.025` is the usable range."
+				},
+				"ugougoMoji.fps": {
+					"type": "number",
+					"default": 8,
+					"minimum": 1,
+					"maximum": 30,
+					"description": "Frames per second. Low values look hand-drawn; the original show sits around 6-10."
+				},
+				"ugougoMoji.frames": {
+					"type": "number",
+					"default": 4,
+					"minimum": 2,
+					"maximum": 12,
+					"description": "How many distinct distortions are cycled through."
+				},
+				"ugougoMoji.jitter": {
+					"type": "number",
+					"default": 1,
+					"minimum": 0,
+					"maximum": 8,
+					"description": "Extra wobble applied to each glyph on its own. 0 turns it off."
+				},
+				"ugougoMoji.align": {
+					"type": "string",
+					"default": "center",
+					"enum": [
+						"left",
+						"center",
+						"right"
+					],
+					"description": "Horizontal alignment of the block."
+				},
+				"ugougoMoji.font": {
+					"type": "string",
+					"default": "'Rounded Mplus 1c', 'Hiragino Maru Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif",
+					"description": "CSS font stack used for the glyphs. A rounded gothic gets closest to the original."
+				},
+				"ugougoMoji.animate": {
+					"type": "boolean",
+					"default": true,
+					"description": "Turn off to render a single static distorted frame."
+				}
+			}
+		}
+	}
+}

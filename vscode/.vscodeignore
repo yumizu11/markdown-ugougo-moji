@@ -1,0 +1,3 @@
+esbuild.mjs
+.vscodeignore
+**/*.map

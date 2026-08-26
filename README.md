@@ -321,6 +321,67 @@ size: 72
 
 ---
 
+## VS Code のプレビューで使う
+
+VS Code の標準 Markdown プレビューでも、同じ記法がそのまま使えます。
+拡張機能の実体は `vscode/` にあります。
+
+### ビルドと導入
+
+```bash
+npm install
+npm run build
+```
+
+`vscode/extension.js` が生成されます。あとは `vscode/` の中身を
+VS Code の拡張機能フォルダにコピーするだけです。
+
+```powershell
+$dest = "$env:USERPROFILE\.vscode\extensions\mizutani.ugougo-moji-0.1.0"
+New-Item -ItemType Directory -Force $dest
+Copy-Item vscode\package.json, vscode\extension.js, vscode\README.md $dest
+```
+
+VS Code を再起動（またはコマンドパレットから「Developer: Reload Window」）すると有効になります。
+
+配布用に `.vsix` を作る場合は [`@vscode/vsce`](https://github.com/microsoft/vscode-vsce) を使います。
+
+```bash
+npx @vscode/vsce package
+```
+
+### 使う
+
+Markdown ファイルを開いてプレビュー（`Ctrl+K V`）を表示するだけです。
+記法は Obsidian・Marp と完全に同じです。
+
+````markdown
+```ugougo
+ウゴウゴルーガ
+```
+````
+
+### 設定
+
+**設定 → 拡張機能 → Ugougo Moji** で全オプションの既定値を変更できます
+（設定 ID は `ugougoMoji.*`）。
+
+設定は**ブロックを描画するたびに読み直される**ので、変更後はプレビューを
+更新すれば反映されます。ウィンドウの再読み込みは不要です。
+
+### 仕組み
+
+`package.json` で `markdown.markdownItPlugins` を宣言し、`activate()` から
+`extendMarkdownIt` を返しているだけです。描画は `src/core.ts`、記法の解釈は
+`src/markdown-it-plugin.ts` と、Obsidian・Marp と同じものを使っています。
+
+プレビューの Content-Security-Policy は `script-src` に nonce を要求しますが、
+**描画に JavaScript を使わない設計**なので影響を受けません。
+`style-src` には全セキュリティレベルで `'unsafe-inline'` が含まれているため、
+各ブロックが持つインライン `<style>`（一文字ジッターの `@keyframes`）も有効です。
+
+---
+
 ## アクセシビリティ
 
 常に動き続ける文字は、前庭障害や注意障害のある人にとって実際に負担になります。
@@ -367,7 +428,10 @@ vault の `.obsidian/plugins/ugougo-moji/` にリポジトリごとシンボリ�
 | `src/settings.ts` | 設定画面 |
 | `src/main.ts` | プラグイン本体。コードブロックプロセッサとコマンドの登録 |
 | `src/export.ts` | Marp CLI の起動。パス解決と引数組み立て。Obsidian 非依存 |
-| `src/marp-engine.ts` | Marp CLI 用カスタムエンジン。markdown-it プラグインも export |
+| `src/markdown-it-plugin.ts` | `ugougo` フェンスの markdown-it プラグイン。Marp と VS Code が共用 |
+| `src/marp-engine.ts` | Marp CLI 用カスタムエンジン |
+| `src/vscode-extension.ts` | VS Code 拡張のエントリ |
+| `vscode/` | VS Code 拡張のマニフェストとビルド設定 |
 | `src/generated/engine-source.ts` | 生成物。エンジンを文字列化したもの（`main.js` に埋め込まれる） |
 | `esbuild.engine.mjs` | エンジンのビルドと、上記の生成 |
 | `esbuild.config.mjs` | プラグイン（`main.js`）のビルド |
