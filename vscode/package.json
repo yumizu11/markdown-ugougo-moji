@@ -2,6 +2,11 @@
 	"name": "ugougo-moji",
 	"displayName": "Ugougo Moji",
 	"description": "Renders text in ugougo code blocks as wobbling retro-TV style graphics in the Markdown preview.",
+	"icon": "icon.png",
+	"galleryBanner": {
+		"color": "#141020",
+		"theme": "dark"
+	},
 	"version": "0.1.0",
 	"publisher": "yumizu",
 	"license": "MIT",
