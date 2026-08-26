@@ -1,0 +1,28 @@
+{
+	"name": "obsidian-ugougo-moji",
+	"version": "0.1.0",
+	"description": "Obsidian plugin that renders ugougo code blocks as wobbling retro-TV style text.",
+	"main": "main.js",
+	"type": "module",
+	"scripts": {
+		"dev": "node esbuild.engine.mjs && node esbuild.config.mjs",
+		"build": "node esbuild.engine.mjs && tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+		"build:engine": "node esbuild.engine.mjs",
+		"marp": "marp --no-stdin --engine ./marp-engine.cjs",
+		"marp:server": "marp --no-stdin --engine ./marp-engine.cjs -s ."
+	},
+	"keywords": [
+		"obsidian-plugin",
+		"svg",
+		"animation"
+	],
+	"license": "MIT",
+	"devDependencies": {
+		"@marp-team/marp-cli": "^4.5.0",
+		"@marp-team/marp-core": "^4.4.0",
+		"@types/node": "^22.15.17",
+		"esbuild": "0.25.5",
+		"obsidian": "latest",
+		"typescript": "^5.8.3"
+	}
+}

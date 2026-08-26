@@ -1,0 +1,41 @@
+.ugougo-block {
+	display: flex;
+	margin: 0.7em 0;
+	overflow-x: auto;
+}
+
+.ugougo-block[data-align='left'] {
+	justify-content: flex-start;
+}
+
+.ugougo-block[data-align='center'] {
+	justify-content: center;
+}
+
+.ugougo-block[data-align='right'] {
+	justify-content: flex-end;
+}
+
+/* The SVG carries intrinsic width/height attributes; let it shrink on narrow
+   panes without distorting. flex-shrink is needed or flexbox refuses to. */
+.ugougo-block .ugougo-svg {
+	max-width: 100%;
+	height: auto;
+	flex-shrink: 1;
+	overflow: visible;
+}
+
+.ugougo-notice {
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+	font-style: italic;
+}
+
+/* Belt and braces — the plugin already renders still frames when the system
+   asks for reduced motion, but this also covers a vault where that setting
+   was switched off after the block was rendered. */
+@media (prefers-reduced-motion: reduce) {
+	.ugougo-block .ugougo-svg .ugo-ch {
+		animation: none !important;
+	}
+}

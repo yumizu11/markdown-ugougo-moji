@@ -1,0 +1,9 @@
+{
+	"id": "ugougo-moji",
+	"name": "Ugougo Moji",
+	"version": "0.1.0",
+	"minAppVersion": "1.0.0",
+	"description": "Renders text in ugougo code blocks as wobbling retro-TV style graphics.",
+	"author": "mizutani",
+	"isDesktopOnly": false
+}
