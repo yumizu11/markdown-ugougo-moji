@@ -307,7 +307,14 @@ export async function runMarpWithFallback(
 	}
 
 	if (lastUnavailable) return lastUnavailable;
-	throw lastError ?? new Error('No way to run Marp CLI was available.');
+	if (lastError instanceof Error) throw lastError;
+	// A spawn failure normally rejects with an Error, but never rely on it:
+	// throwing a bare value loses the stack and breaks `instanceof` for callers.
+	throw new Error(
+		lastError === undefined
+			? 'No way to run Marp CLI was available.'
+			: `Could not start Marp CLI: ${String(lastError)}`
+	);
 }
 
 /**

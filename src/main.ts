@@ -151,7 +151,10 @@ export default class UgougoPlugin extends Plugin {
 			return;
 		}
 
-		// Required lazily so nothing Node-only is touched on mobile.
+		// Node is only ever reached from here, and only on desktop. The command
+		// that leads here is already gated the same way; repeating the check
+		// keeps the guard next to the require, where it can be seen.
+		if (!Platform.isDesktopApp) return;
 		const nodePath = require('path') as typeof import('path');
 		const nodeFs = require('fs') as typeof import('fs');
 		const { spawn } = require('child_process') as typeof import('child_process');
@@ -224,6 +227,7 @@ export default class UgougoPlugin extends Plugin {
 			openExternal(url: string): Promise<void>;
 			openPath(path: string): Promise<string>;
 		};
+		if (!Platform.isDesktopApp) return;
 		try {
 			const { pathToFileURL } = require('url') as typeof import('url');
 			const { shell } = require('electron') as { shell: Shell };

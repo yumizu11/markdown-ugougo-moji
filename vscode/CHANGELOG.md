@@ -4,6 +4,9 @@
 
 Initial release.
 
+- `font` accepts family names in any script, so Japanese names such as
+  `メイリオ` and `游ゴシック体` work as well as latin ones.
+
 - `ugougo` fenced code blocks render in the built-in Markdown preview as
   wobbling retro-TV style text.
 - Per-block options in the block body (`color`, `size`, `wobble`, `freq`, `fps`,

@@ -62,7 +62,6 @@ export class UgougoSettingTab extends PluginSettingTab {
 						1
 					)
 					.setValue(Math.round(s.strokeWidth * STROKE_SCALE))
-					.setDynamicTooltip()
 					.onChange(async (v) => {
 						s.strokeWidth = v / STROKE_SCALE;
 						await this.commit();
@@ -75,7 +74,6 @@ export class UgougoSettingTab extends PluginSettingTab {
 				sl
 					.setLimits(LIMITS.size.min, LIMITS.size.max, 1)
 					.setValue(s.size)
-					.setDynamicTooltip()
 					.onChange(async (v) => {
 						s.size = v;
 						await this.commit();
@@ -93,7 +91,6 @@ export class UgougoSettingTab extends PluginSettingTab {
 				sl
 					.setLimits(LIMITS.wobble.min, LIMITS.wobble.max, 1)
 					.setValue(s.wobble)
-					.setDynamicTooltip()
 					.onChange(async (v) => {
 						s.wobble = v;
 						await this.commit();
@@ -114,7 +111,6 @@ export class UgougoSettingTab extends PluginSettingTab {
 						1
 					)
 					.setValue(Math.round(s.freq * FREQ_SCALE))
-					.setDynamicTooltip()
 					.onChange(async (v) => {
 						s.freq = v / FREQ_SCALE;
 						await this.commit();
@@ -128,7 +124,6 @@ export class UgougoSettingTab extends PluginSettingTab {
 				sl
 					.setLimits(LIMITS.fps.min, LIMITS.fps.max, 1)
 					.setValue(s.fps)
-					.setDynamicTooltip()
 					.onChange(async (v) => {
 						s.fps = v;
 						await this.commit();
@@ -142,7 +137,6 @@ export class UgougoSettingTab extends PluginSettingTab {
 				sl
 					.setLimits(LIMITS.frames.min, LIMITS.frames.max, 1)
 					.setValue(s.frames)
-					.setDynamicTooltip()
 					.onChange(async (v) => {
 						s.frames = v;
 						await this.commit();
@@ -156,7 +150,6 @@ export class UgougoSettingTab extends PluginSettingTab {
 				sl
 					.setLimits(LIMITS.jitter.min, LIMITS.jitter.max, 1)
 					.setValue(s.jitter)
-					.setDynamicTooltip()
 					.onChange(async (v) => {
 						s.jitter = v;
 						await this.commit();

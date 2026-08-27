@@ -90,8 +90,16 @@ const NUMERIC_BY_KEY = new Map<string, NumericKey>(
 /** #rgb / #rrggbb(aa), rgb()/rgba()/hsl()/hsla(), or a bare CSS colour keyword. */
 const COLOR_RE =
 	/^(#[0-9a-f]{3,8}|[a-z]+|(?:rgb|hsl)a?\([0-9\s.,%/-]+\))$/i;
-/** Font stacks are written straight into an SVG attribute — keep them boring. */
-const FONT_RE = /^[\w\s,'"°ー\-]+$/;
+/**
+ * Font stacks are written into an SVG attribute, so they stay boring.
+ *
+ * Letters of any script are allowed — a plugin for Japanese text has to accept
+ * `メイリオ` and `游ゴシック体` — along with digits, spaces, quotes, commas,
+ * dots, underscores and hyphens. Everything else is refused, which most
+ * usefully rules out the brackets that `url(...)` would need. The value is XML
+ * escaped on the way out regardless; this is the belt to that pair of braces.
+ */
+const FONT_RE = /^[\p{L}\p{N}\s,'"._-]+$/u;
 
 export function clamp(value: number, key: NumericKey): number {
 	const { min, max } = LIMITS[key];
