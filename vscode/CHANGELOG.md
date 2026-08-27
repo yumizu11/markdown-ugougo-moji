@@ -1,11 +1,14 @@
 # Change Log
 
+## 0.1.1
+
+- `font` now accepts family names in any script. Japanese names such as
+  `メイリオ` and `游ゴシック体` were previously discarded, silently falling
+  back to the default.
+
 ## 0.1.0
 
 Initial release.
-
-- `font` accepts family names in any script, so Japanese names such as
-  `メイリオ` and `游ゴシック体` work as well as latin ones.
 
 - `ugougo` fenced code blocks render in the built-in Markdown preview as
   wobbling retro-TV style text.
