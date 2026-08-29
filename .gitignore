@@ -21,3 +21,6 @@ src/generated/
 # VS Code extension build output
 vscode/extension.js
 vscode/*.vsix
+
+# Blog draft (not part of the project)
+blog.md

@@ -15,7 +15,7 @@ marp --engine ./marp-engine.cjs examples/slides.md -o slides.html
 ---
 
 ```ugougo
-ウゴウゴルーガ
+うにょうにょ
 ```
 
 `ugougo` ブロックは Obsidian のときと同じ書き方です。
@@ -30,6 +30,18 @@ fps: 6
 ---
 おはよう
 みんなげんき？
+```
+
+---
+
+## 等幅フォントでコードを動かす
+
+```ugougo
+font: Courier New
+size: 40
+color: #5eff9b
+---
+printf('ウゴウゴ');
 ```
 
 ---

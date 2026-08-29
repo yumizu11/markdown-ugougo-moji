@@ -11,9 +11,14 @@ same way.
 
 ````markdown
 ```ugougo
-ウゴウゴルーガ
+うにょうにょ
 ```
 ````
+
+> **Unofficial.** This is a personal project. It is not affiliated with,
+> sponsored by, or endorsed by Fuji Television Network, Inc. or the creators of
+> *Ugougo Lhuga*. The programme is named only to describe the visual effect
+> being reproduced.
 
 ## Options
 
@@ -28,6 +33,18 @@ fps: 6
 ---
 おはよう
 みんなげんき？
+```
+````
+
+Point `font` at a monospace family and code wobbles too:
+
+````markdown
+```ugougo
+font: Courier New
+size: 44
+color: #5eff9b
+---
+printf('ウゴウゴ');
 ```
 ````
 
@@ -86,3 +103,102 @@ The renderer is shared, so the identical syntax also works in
 ## License
 
 MIT — see [LICENSE](https://github.com/yumizu11/markdown-ugougo-moji/blob/main/LICENSE).
+
+---
+
+# ウゴウゴ文字（日本語）
+
+VS Code の標準 Markdown プレビューで、文字を**うにょうにょ揺らします。**
+
+1990年代前半の子供番組「ウゴウゴルーガ」で、画面の文字がずっと落ち着かなく
+動いていた、あの質感の再現です。`ugougo` コードブロックに書いた文字が同じように
+沸き立ちます。
+
+````markdown
+```ugougo
+うにょうにょ
+```
+````
+
+> **非公式プロジェクトです。**
+> 本拡張は個人によるもので、株式会社フジテレビジョンおよび「ウゴウゴルーガ」の
+> 制作者・権利者とは一切関係がありません。番組名は、再現しようとしている視覚効果を
+> 説明する目的でのみ言及しています。
+
+## オプション
+
+オプションはブロックの本文に書き、`---` で表示テキストと区切ります。
+
+````markdown
+```ugougo
+color: #5eff9b
+size: 64
+wobble: 16
+fps: 6
+---
+おはよう
+みんなげんき？
+```
+````
+
+`font` に等幅フォントを指定すれば、コードを動かすこともできます。
+
+````markdown
+```ugougo
+font: Courier New
+size: 44
+color: #5eff9b
+---
+printf('ウゴウゴ');
+```
+````
+
+| キー | 既定値 | 範囲 | 説明 |
+|---|---|---|---|
+| `color` | `#ffe600` | CSS の色 | 文字の塗りの色 |
+| `stroke` | `#000000` | CSS の色 | 輪郭の色 |
+| `strokeWidth` | `0.17` | `0`–`0.6` | 輪郭の太さ（フォントサイズに対する比） |
+| `size` | `56` | `8`–`240` | フォントサイズ |
+| `wobble` | `12` | `0`–`30` | 揺れの強さ |
+| `freq` | `0.015` | `0.002`–`0.09` | 歪みの細かさ。小さいと大きくうねり、大きいとギザギザに |
+| `fps` | `8` | `1`–`30` | 1秒あたりのコマ数。少ないほど手描きアニメ風 |
+| `frames` | `4` | `2`–`12` | 巡回するコマの枚数 |
+| `jitter` | `1` | `0`–`8` | 一文字ごとの揺れ幅（px）。`0` で無効 |
+| `align` | `center` | `left`/`center`/`right` | 配置 |
+| `font` | 丸ゴシック系 | フォントスタック | フォント指定 |
+| `animate` | `true` | `true`/`false` | `false` で静止した1コマになる |
+
+キー名は大文字小文字とハイフンを無視します（`strokeWidth` / `strokewidth` /
+`stroke-width` はすべて同じ）。範囲外の数値は自動で丸められ、解釈できない値は
+既定値のまま無視されるので、タイポはそのブロックが劣化するだけで済みます。
+
+**`wobble` は 9〜16、`freq` は 0.010〜0.025 に収めてください。**
+おおよそ 20 と 0.05 を超えると文字が紙吹雪になります。狙ってやる分には自由です。
+
+## 設定
+
+**設定 → 拡張機能 → Ugougo Moji**（設定 ID は `ugougoMoji.*`）で、
+すべてのオプションの既定値を変更できます。ブロックに書いたオプションが常に優先されます。
+
+設定はブロックを描画するたびに読み直すので、変更後はプレビューを更新するだけで
+反映されます。ウィンドウの再読み込みは不要です。
+
+## 注意点
+
+- 描画はインライン SVG と CSS だけで、**JavaScript を使いません。**
+  プレビューの Content-Security-Policy を素通りできるのはこのためです。
+- 各ブロックに `role="img"` と `aria-label`（元のテキスト）が付くので、
+  スクリーンリーダーは図として飛ばさず、文字として読み上げます。
+- 一文字ジッターの `@keyframes` は `prefers-reduced-motion` に従います。
+  常に動く文字は実際に負担になるので、静止させたいときはブロックに
+  `animate: false` を指定するか、`ugougoMoji.animate` をオフにしてください。
+- 丸ゴシック体がいちばん原典に近くなります。
+  [M PLUS Rounded 1c](https://fonts.google.com/specimen/M+PLUS+Rounded+1c) の
+  導入が手軽です。
+
+## 同じ記法が他でも動きます
+
+描画部分を共有しているため、まったく同じ書き方が
+[Obsidian](https://github.com/yumizu11/markdown-ugougo-moji#導入方法) と
+[Marp スライド](https://github.com/yumizu11/markdown-ugougo-moji#marp-スライドで使う)
+でも使えます。

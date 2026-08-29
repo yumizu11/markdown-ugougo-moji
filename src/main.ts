@@ -31,7 +31,7 @@ export default class UgougoPlugin extends Plugin {
 			name: 'Insert block',
 			editorCallback: (editor: Editor) => {
 				const selection = editor.getSelection();
-				const body = selection.trim() === '' ? 'ウゴウゴルーガ' : selection;
+				const body = selection.trim() === '' ? 'うにょうにょ' : selection;
 				editor.replaceSelection('```ugougo\n' + body + '\n```\n');
 			},
 		});
