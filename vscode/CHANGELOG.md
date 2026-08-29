@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.1.2
+
+Documentation only; the extension itself is unchanged from 0.1.1.
+
+- The whole page is now repeated in Japanese below the English.
+- Added a notice that this is an unofficial personal project, with no
+  connection to Fuji Television Network, Inc. or the creators of the
+  programme the effect imitates.
+- Added a monospace example: `printf('ウゴウゴ');` in Courier New.
+
 ## 0.1.1
 
 - `font` now accepts family names in any script. Japanese names such as
